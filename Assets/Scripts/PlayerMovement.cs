@@ -25,12 +25,32 @@ public class PlayerMovement : MonoBehaviour
         this.jump = false;
     }
 
-    void OnMove(UnityEngine.InputSystem.InputValue inputValue) {
+    void OnMove(UnityEngine.InputSystem.InputValue inputValue)
+    {
         this.moveVector = inputValue.Get<Vector2>();
         animator.SetFloat("Speed", Mathf.Abs(moveVector.x));
     }
 
-    void OnJump(UnityEngine.InputSystem.InputValue inputValue) => this.jump = true;
+    void OnJump(UnityEngine.InputSystem.InputValue inputValue)
+    {
+        this.jump = true;
+        animator.SetBool("IsJumping", true);
+    }
 
-    void OnCrouch(UnityEngine.InputSystem.InputValue inputValue) => this.crouch = inputValue.isPressed;
+    public void OnJumpLanding()
+    {
+        animator.SetBool("IsJumping", false);
+    }
+
+    void OnCrouch(UnityEngine.InputSystem.InputValue inputValue)
+    {
+        this.crouch = inputValue.isPressed;
+        animator.SetBool("IsCrouching", this.crouch);
+    }
+
+    public void OnCrouching(bool isCrouching)
+    {
+        Debug.Log("OnCrouching(" + isCrouching + ") invoked");
+        animator.SetBool("IsCrouching", isCrouching);
+    }
 }
