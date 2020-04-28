@@ -45,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
     void OnCrouch(UnityEngine.InputSystem.InputValue inputValue)
     {
         this.crouch = inputValue.isPressed;
-        animator.SetBool("IsCrouching", this.crouch);
     }
 
     public void OnCrouching(bool isCrouching)
